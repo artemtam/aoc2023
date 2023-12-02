@@ -9,7 +9,7 @@ test('part 1', () => {
     expect(solvePart1(input)).toEqual(55712);
 })
 
-test.only('part 2', () => {
+test('part 2', () => {
     expect(solvePart2(input)).toEqual(55413);
 })
 
