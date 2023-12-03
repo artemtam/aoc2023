@@ -1,15 +1,11 @@
-# aoc2023
+# 🎄 Advent of Code 2023
 
-To install dependencies:
+My [Advent of Code 2023](https://adventofcode.com/2023) solutions on TypeScript & Bun.
 
-```bash
-bun install
-```
+### Running locally
 
-To run:
+Bun has to be installed, then:
 
 ```bash
-bun run index.ts
+bun test
 ```
-
-This project was created using `bun init` in bun v1.0.11. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
