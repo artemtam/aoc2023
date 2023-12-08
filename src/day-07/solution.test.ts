@@ -9,10 +9,6 @@ test('part 1', () => {
     expect(solvePart1(input)).toEqual(250898830);
 });
 
-
 test('part 2', () => {
     expect(solvePart2(input)).toEqual(252127335);
 });
-
-
-
