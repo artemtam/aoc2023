@@ -1,9 +1,9 @@
 /**
  * Calculates hand strength (an arbitrary value 7 - highest, 1 - lowest)
  * @param hand
- * @param withJocker
+ * @param withJoker
  */
-const getHandStrength = (hand: string, withJocker: boolean): number => {
+const getHandStrength = (hand: string, withJoker: boolean): number => {
     // count cards frequencies
 
     const cardsFreq = new Map<string, number>();
@@ -13,9 +13,9 @@ const getHandStrength = (hand: string, withJocker: boolean): number => {
         cardsFreq.set(card, cardFreq ? cardFreq + 1 : 1);
     }
 
-    // handle withJocker for Part 2
+    // handle withJoker for Part 2
 
-    if (withJocker && cardsFreq.has('J')) {
+    if (withJoker && cardsFreq.has('J')) {
         const jFreq = cardsFreq.get('J')!;
 
         // find non-J card with maximum frequency
@@ -42,23 +42,11 @@ const getHandStrength = (hand: string, withJocker: boolean): number => {
 
     const nOfKinds = Array.from(cardsFreq.values()).sort((a, b) => b - a);
 
-    // calculate strength
+    // calculate strength as highest n of kinds * 10 + second highest
+    // it is a little magic, but it works, see examples:
+    // AAAAAA - 50, AAAAB - 41, AAABB - 32, AAABC - 31, AABBC - 22, etc.
 
-    if (nOfKinds[0] === 5) { // 5 of kind
-        return 7;
-    } else if (nOfKinds[0] === 4) { // 4 of kind
-        return 6;
-    } else if (nOfKinds[0] === 3 && nOfKinds[1] === 2) { // full house
-        return 5;
-    } else if (nOfKinds[0] === 3) { // 3 of kind
-        return 4;
-    } else if (nOfKinds[0] === 2 && nOfKinds[1] === 2) { // 2 pair
-        return 3;
-    } else if (nOfKinds[0] === 2) { // 1 pair
-        return 2;
-    } else {
-        return 1;
-    }
+    return nOfKinds[0] * 10 + (nOfKinds[1] ?? 0);
 };
 
 /**
@@ -81,19 +69,21 @@ const compareSameHands = (handA: string, handB: string, cardsStrength: string): 
 
 
 export const solvePart1 = (input: string): number => {
-    // parse input
+    // parse input & calculate strength of each hand
 
-    const handBids: { hand: string, bid: number }[] = input.trim().split('\n')
-        .map((handLine) => ({
-            hand: handLine.split(' ')[0],
-            bid: Number(handLine.split(' ')[1]),
-        }));
+    const handBids: { hand: string, strength: number, bid: number }[] = input.trim().split('\n')
+        .map((handLine) => {
+            const hand = handLine.split(' ')[0];
+            const bid = Number(handLine.split(' ')[1]);
+            const strength = getHandStrength(hand, false);
+
+            return { hand, strength, bid }
+        });
 
     // sort handBids based on hand strength (lower to higher)
 
     handBids.sort((a, b) => {
-        return getHandStrength(a.hand, false) - getHandStrength(b.hand, false)
-            || compareSameHands(a.hand, b.hand, '23456789TJQKA');
+        return a.strength - b.strength || compareSameHands(a.hand, b.hand, '23456789TJQKA');
     });
 
     // count & return total winnings
@@ -104,19 +94,21 @@ export const solvePart1 = (input: string): number => {
 };
 
 export const solvePart2 = (input: string): number => {
-    // parse input
+    // parse input & calculate strength of each hand
 
-    const handBids: { hand: string, bid: number }[] = input.trim().split('\n')
-        .map((handLine) => ({
-            hand: handLine.split(' ')[0],
-            bid: Number(handLine.split(' ')[1]),
-        }));
+    const handBids: { hand: string, strength: number, bid: number }[] = input.trim().split('\n')
+        .map((handLine) => {
+            const hand = handLine.split(' ')[0];
+            const bid = Number(handLine.split(' ')[1]);
+            const strength = getHandStrength(hand, true);
+
+            return { hand, strength, bid }
+        });
 
     // sort handBids based on hand strength (lower to higher)
 
     handBids.sort((a, b) => {
-        return getHandStrength(a.hand, true) - getHandStrength(b.hand, true)
-            || compareSameHands(a.hand, b.hand, 'J23456789TQKA');
+        return a.strength - b.strength || compareSameHands(a.hand, b.hand, 'J23456789TQKA');
     });
 
     // count & return total winnings
