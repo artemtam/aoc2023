@@ -1,8 +1,8 @@
-# 🎄 Advent of Code 2023
+# 🎄 Advent of Code
 
-My [Advent of Code 2023](https://adventofcode.com/2023) solutions on TypeScript & Bun. 
+My [Advent of Code](https://adventofcode.com) solutions on TypeScript & Bun. 
 
-The code is a balanace between clarity, pefrormance, and my ability to spend time improving it. I also leave [explanatory comments](https://github.com/artemtam/aoc2023/blob/ff3d63b42fd5f4d9079f0cf0bb4a9e76b702a867/src/day-06/solution.ts#L36), so if you're stuck and want to better understand thought process behind, this repository might be helpful.
+The code is a balance between clarity, performance, and my ability to spend time improving it. I also leave [explanatory comments](https://github.com/artemtam/aoc2023/blob/ff3d63b42fd5f4d9079f0cf0bb4a9e76b702a867/src/day-06/solution.ts#L36), so if you're stuck and want to better understand thought process behind, this repository might be helpful.
 
 ### Running locally
 
