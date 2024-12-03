@@ -40,9 +40,6 @@ export const solvePart2 = (input: string): number => {
     return safeReports;
 };
 
-/**
- * @description Check if the given report is safe based on the task rules
- */
 const isReportSafe = (levels: number[]): boolean => {
     const increasing = levels[1] > levels[0];
 
