@@ -1,11 +1,10 @@
-const INSTRUCTIONS_REGEXP = new RegExp(/mul\((?<a>\d*),(?<b>\d*)\)/gm);
+const INSTRUCTIONS_REGEXP = /mul\((?<a>\d*),(?<b>\d*)\)/g;
 
 export const solvePart1 = (input: string): number => {
-    const matches = input.matchAll(INSTRUCTIONS_REGEXP);
-
     let result = 0;
+    let match = null;
 
-    for (const match of matches) {
+    while ((match = INSTRUCTIONS_REGEXP.exec(input)) !== null) {
         result += Number(match.groups!.a) * Number(match.groups!.b);
     }
 
@@ -18,15 +17,14 @@ export const solvePart1 = (input: string): number => {
 //
 // NB: group names are used to later identify which instruction/condition was matched
 
-const INSTRUCTIONS_WITH_CONDITIONS = new RegExp(/(?<do>do\(\))|(?<dont>don't\(\))|(?<mul>mul\((?<a>\d*),(?<b>\d*)\))/gm);
+const INSTRUCTIONS_WITH_CONDITIONS = /(?<do>do\(\))|(?<dont>don't\(\))|(?<mul>mul\((?<a>\d*),(?<b>\d*)\))/g;
 
 export const solvePart2 = (input: string): number => {
-    const matches = input.matchAll(INSTRUCTIONS_WITH_CONDITIONS);
-
     let result = 0;
     let shouldDo = true;
+    let match = null;
 
-    for (const match of matches) {
+    while ((match = INSTRUCTIONS_WITH_CONDITIONS.exec(input)) !== null) {
         if (shouldDo && match.groups?.mul !== undefined) {
             result += Number(match.groups.a) * Number(match.groups.b);
         } else if (match.groups?.do !== undefined) {
