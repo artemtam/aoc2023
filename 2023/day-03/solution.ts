@@ -3,7 +3,7 @@ const isSymbol = (str: string): boolean => {
 };
 
 const isNumber = (str: string): boolean => {
-    return !Number.isNaN(parseInt(str));
+    return !Number.isNaN(Number(str));
 };
 
 const isGear = (str: string): boolean => {

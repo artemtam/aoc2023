@@ -5,8 +5,8 @@ export const solvePart1 = (input: string): number => {
     for (const line of input.trim().split('\n')) {
         const [a, b] = line.trim().split('   ');
 
-        listA.push(Number.parseInt(a, 10));
-        listB.push(Number.parseInt(b, 10));
+        listA.push(Number(a));
+        listB.push(Number(b));
     }
 
     // sort both lists
@@ -32,8 +32,8 @@ export const solvePart2 = (input: string): number => {
     for (const line of input.trim().split('\n')) {
         const values = line.trim().split('   ');
 
-        const a = Number.parseInt(values[0], 10);
-        const b = Number.parseInt(values[1], 10);
+        const a = Number(values[0]);
+        const b = Number(values[1]);
 
         listA.push(a);
         listB.set(b, (listB.get(b) ?? 0) + 1);

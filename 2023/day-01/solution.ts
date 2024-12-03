@@ -3,7 +3,7 @@
  * @param str
  */
 const parseDigit = (str: string): number | null => {
-    const digit = Number.parseInt(str);
+    const digit = Number(str);
     return !Number.isNaN(digit) ? digit : null;
 }
 
