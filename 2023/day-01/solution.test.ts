@@ -6,7 +6,7 @@ const inputFile = Bun.file(import.meta.dir + '/input.txt');
 const input = await inputFile.text();
 
 test('part 1', () => {
-    expect(solvePart1(input)).toEqual(0);
+    expect(solvePart1(input)).toEqual(55712);
 })
 
 test('part 2', () => {
